@@ -8,6 +8,7 @@
     "start": "node ./node_modules/next/dist/bin/next start"
   },
   "dependencies": {
+    "daisyui": "^5.5.18",
     "emailjs-com": "^3.2.0",
     "firebase": "^10.7.0",
     "next": "14.2.5",
