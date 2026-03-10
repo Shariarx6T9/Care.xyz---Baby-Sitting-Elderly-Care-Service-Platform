@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
@@ -7,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 
-export default function Login() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -36,7 +37,7 @@ export default function Login() {
     try {
       await loginWithGoogle();
       router.push(redirect);
-    } catch (err) {
+    } catch {
       setError("Google login failed. Please try again.");
     }
   };
@@ -61,25 +62,23 @@ export default function Login() {
             <input
               type="email"
               placeholder="you@example.com"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-
           <button
             type="submit"
             disabled={loading}
@@ -119,5 +118,13 @@ export default function Login() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
