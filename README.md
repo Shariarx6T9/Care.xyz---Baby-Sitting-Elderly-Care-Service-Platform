@@ -9,8 +9,7 @@
 
 ## 🌐 Live Demo
 
-🔗 [https://care-xyz.vercel.app](https://care-xyz.vercel.app)
-
+🔗 [https://care-xyz-baby-sitting-elderly-care.vercel.app/]
 ---
 
 ## 📌 Project Overview
